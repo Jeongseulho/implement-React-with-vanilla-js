@@ -1,13 +1,8 @@
 import Component from '../core/Component.js';
 
 export default class Items extends Component {
-	template() {
-		const { filteredItems } = this.$props;
+	getList(seq, contents, active) {
 		return `
-      <ul>
-        ${filteredItems
-					.map(
-						({ contents, active, seq }) => `
           <li data-seq="${seq}">
             ${contents}
             <button class="toggleBtn" style="color: ${
@@ -17,7 +12,16 @@ export default class Items extends Component {
             </button>
             <button class="deleteBtn">삭제</button>
           </li>
-        `,
+        `;
+	}
+
+	template() {
+		const { filteredItems } = this.$props;
+		return `
+      <ul>
+        ${filteredItems
+					.map(({ contents, active, seq }) =>
+						this.getList(seq, contents, active),
 					)
 					.join('')}
       </ul>
