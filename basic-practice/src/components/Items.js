@@ -28,15 +28,19 @@ export default class Items extends Component {
     `;
 	}
 
+	getTargetSeq(target) {
+		return target.closest('[data-seq]').dataset.seq;
+	}
+
 	setEvent() {
 		const { deleteItem, toggleItem } = this.$props;
 
 		this.addEvent('click', '.deleteBtn', ({ target }) => {
-			deleteItem(Number(target.closest('[data-seq]').dataset.seq));
+			deleteItem(Number(this.getTargetSeq(target)));
 		});
 
 		this.addEvent('click', '.toggleBtn', ({ target }) => {
-			toggleItem(Number(target.closest('[data-seq]').dataset.seq));
+			toggleItem(Number(this.getTargetSeq(target)));
 		});
 	}
 }
