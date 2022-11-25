@@ -2,11 +2,12 @@ import Component from './core/Component.js';
 import Items from './components/Items.js';
 import ItemAppender from './components/ItemAppender.js';
 import ItemFilter from './components/ItemFilter.js';
+import { FILTER } from './constant.js';
 
 export default class App extends Component {
 	setup() {
 		this.$state = {
-			isFilter: 0,
+			isFilter: FILTER.ALL,
 			items: [
 				{
 					seq: 1,
@@ -31,6 +32,7 @@ export default class App extends Component {
 	}
 
 	mounted() {
+		// this.앞에 매번 안붙이도록 하기 위해 설정한 것
 		const { filteredItems, addItem, deleteItem, toggleItem, filterItem } = this;
 		const $itemAppender = this.$target.querySelector(
 			'[data-component="item-appender"]',
@@ -60,9 +62,9 @@ export default class App extends Component {
 		const { isFilter, items } = this.$state;
 		return items.filter(
 			({ active }) =>
-				(isFilter === 1 && active) ||
-				(isFilter === 2 && !active) ||
-				isFilter === 0,
+				(isFilter === FILTER.ACTIVE && active) ||
+				(isFilter === FILTER.IN_ACTIVE && !active) ||
+				isFilter === FILTER.ALL,
 		);
 	}
 
