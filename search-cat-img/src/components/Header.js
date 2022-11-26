@@ -2,7 +2,8 @@ export default class Header {
 	constructor({ target, genRandomImg }) {
 		this.header = document.createElement('header');
 		target.appendChild(this.header);
-		this.onClick = genRandomImg;
+
+		this.genRandomImg = genRandomImg;
 		this.render();
 	}
 
@@ -13,7 +14,7 @@ export default class Header {
 
 		this.header.addEventListener('click', (e) => {
 			if (e.target.className === 'random-img') {
-				this.onClick();
+				this.genRandomImg();
 			}
 		});
 	}
