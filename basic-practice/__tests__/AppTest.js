@@ -1,12 +1,19 @@
 import App from '../src/App';
+import jsdom from '../../node_modules/jsdom';
 
 describe('App test', () => {
-	const container = document.createElement('div').setAttribute('id', 'app');
-	document.body.appendChild(container);
-	const app = new App('#app');
+	test('should', () => {
+		const { JSDOM } = jsdom;
+		const dom = new JSDOM(/* html */ `
+			<div id="app"></div>
+		`);
 
-	test('test1', () => {
-		expect(app.filterItem()).toEqual([
+		const app = new App(dom.window.document.querySelector('#app'));
+
+		app.addItem('test');
+		const result = app.$state.items;
+
+		expect(result).toEqual([
 			{
 				seq: 1,
 				contents: 'item1',
@@ -16,6 +23,11 @@ describe('App test', () => {
 				seq: 2,
 				contents: 'item2',
 				active: true,
+			},
+			{
+				seq: 3,
+				contents: 'test',
+				active: false,
 			},
 		]);
 	});
