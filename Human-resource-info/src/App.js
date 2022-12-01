@@ -27,4 +27,21 @@ export default class App extends Component {
 		});
 		document.dispatchEvent(urlChange);
 	}
+
+	setEvent() {
+		document.addEventListener('urlchange', (e) => {
+			let pathname = e.detail.href;
+			const main = this.$target.querySelector('main');
+
+			switch (pathname) {
+				case '/web/':
+					// new HomePage(main);
+					break;
+				case '/web/signup':
+					// new SignUpPage(main);
+					break;
+				default:
+			}
+		});
+	}
 }
