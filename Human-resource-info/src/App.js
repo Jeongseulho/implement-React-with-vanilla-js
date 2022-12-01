@@ -2,7 +2,6 @@ import Component from './core/Component.js';
 import Header from './components/Header.js';
 import HomePage from './components/HomePage.js';
 import SignUpPage from './components/SignUpPage.js';
-import ContentTitle from './components/ContentTitle.js';
 import setPersonalInfo from './api/storage.js';
 
 export default class App extends Component {
@@ -25,7 +24,6 @@ export default class App extends Component {
 
 		const main = this.$target.querySelector('main');
 		new HomePage(main);
-		new ContentTitle(main);
 	}
 
 	changeUrl(url) {
