@@ -1,0 +1,29 @@
+* {
+	margin: 0;
+	padding: 0;
+}
+
+header {
+	height: 5rem;
+	background-color: black;
+	position: relative;
+}
+
+.header {
+	position: absolute;
+	padding: 0px 20px;
+	color: white;
+	margin-top: 25px;
+}
+
+.header_left {
+	left: 15px;
+}
+
+.header_right {
+	right: 15px;
+}
+
+.menu_name:hover {
+	cursor: pointer;
+}
