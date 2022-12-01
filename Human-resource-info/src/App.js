@@ -1,12 +1,13 @@
 import Component from './core/Component.js';
 import Header from './components/Header.js';
-// import HomePage from './components/HomePage.js';
+import HomePage from './components/HomePage.js';
+import SignUpPage from './components/SignUpPage.js';
 
 export default class App extends Component {
 	template() {
 		return /* html */ `
 			<header></header>
-			<main></main>
+			<main id="page_content"></main>
 		`;
 	}
 
@@ -17,7 +18,7 @@ export default class App extends Component {
 		});
 
 		const main = this.$target.querySelector('main');
-		// new HomePage(main);
+		new HomePage(main);
 	}
 
 	changeUrl(url) {
@@ -35,10 +36,10 @@ export default class App extends Component {
 
 			switch (pathname) {
 				case '/web/':
-					// new HomePage(main);
+					new HomePage(main);
 					break;
 				case '/web/signup':
-					// new SignUpPage(main);
+					new SignUpPage(main);
 					break;
 				default:
 			}

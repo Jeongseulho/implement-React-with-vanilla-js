@@ -1,5 +1,7 @@
-import Component from './core/Component.js';
+import Component from '../core/Component.js';
 
 export default class HomePage extends Component {
-	template() {}
+	template() {
+		return /* html */ ` <div>홈</div>`;
+	}
 }
