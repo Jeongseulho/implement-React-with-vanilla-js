@@ -17,4 +17,11 @@ export default class Card extends Component {
 			.join('')}	
 		`;
 	}
+
+	setEvent() {
+		this.addEvent('click', '.card', (e) => {
+			const card = e.target.closest('.card');
+			card.classList.toggle('is-flipped');
+		});
+	}
 }

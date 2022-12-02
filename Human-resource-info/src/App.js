@@ -35,7 +35,7 @@ export default class App extends Component {
 	}
 
 	setEvent() {
-		document.addEventListener('urlchange', (e) => {
+		this.addEvent('urlchange', 'document', (e) => {
 			let pathname = e.detail.href;
 			const main = this.$target.querySelector('main');
 
