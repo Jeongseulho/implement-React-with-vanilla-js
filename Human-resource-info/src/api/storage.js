@@ -3,6 +3,6 @@ export default async function setPersonalInfo() {
 	const data = await response.json();
 
 	if (!localStorage.getItem('personalInfo')) {
-		localStorage.setItem('personalInfo', data);
+		localStorage.setItem('personalInfo', JSON.stringify(data));
 	}
 }
