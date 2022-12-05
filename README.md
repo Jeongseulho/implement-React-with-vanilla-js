@@ -1,4 +1,4 @@
-# vanilla-js-web-components
+# implement-React-with-vanilla-js
 
 ## 학습 목표
 
