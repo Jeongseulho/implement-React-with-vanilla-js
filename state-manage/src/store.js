@@ -1,4 +1,4 @@
-import {createStore} from './core/Store.js';
+import { createStore } from './core/Store.js';
 
 const initState = {
   a: 10,
@@ -10,10 +10,10 @@ export const SET_B = 'SET_B';
 
 export const store = createStore((state = initState, action = {}) => {
   switch (action.type) {
-    case 'SET_A' :
-      return { ...state, a: action.payload }
-    case 'SET_B' :
-      return { ...state, b: action.payload }
+    case 'SET_A':
+      return { ...state, a: action.payload };
+    case 'SET_B':
+      return { ...state, b: action.payload };
     default:
       return state;
   }

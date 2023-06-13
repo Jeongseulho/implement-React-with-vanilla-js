@@ -3,7 +3,7 @@ function h(type, props, ...children) {
   return { type, props, children: children.flat() };
 }
 
-function createElement (node) {
+function createElement(node) {
   if (typeof node === 'string') {
     return document.createTextNode(node);
   }
@@ -11,15 +11,11 @@ function createElement (node) {
   const $el = document.createElement(node.type);
 
   Object.entries(node.props || {})
-        .filter(([attr, value]) => value)
-        .forEach(([attr, value]) => (
-          $el.setAttribute(attr, value)
-        ));
+    .filter(([attr, value]) => value)
+    .forEach(([attr, value]) => $el.setAttribute(attr, value));
 
   try {
-    node.children
-        .map(createElement)
-        .forEach(child => $el.appendChild(child));
+    node.children.map(createElement).forEach((child) => $el.appendChild(child));
   } catch (e) {
     console.log(node);
     console.error(e);
@@ -28,7 +24,7 @@ function createElement (node) {
   return $el;
 }
 
-function updateElement (parent, newNode, oldNode, index = 0) {
+function updateElement(parent, newNode, oldNode, index = 0) {
   if (!newNode && oldNode) {
     return parent.removeChild(parent.childNodes[index]);
   }
@@ -37,38 +33,35 @@ function updateElement (parent, newNode, oldNode, index = 0) {
     return parent.appendChild(createElement(newNode));
   }
 
-  if (typeof newNode === "string" && typeof oldNode === "string") {
+  if (typeof newNode === 'string' && typeof oldNode === 'string') {
     if (newNode === oldNode) return;
     return parent.replaceChild(
       createElement(newNode),
-      parent.childNodes[index]
-    )
+      parent.childNodes[index],
+    );
   }
 
   if (newNode.type !== oldNode.type) {
     return parent.replaceChild(
       createElement(newNode),
-      parent.childNodes[index]
-    )
+      parent.childNodes[index],
+    );
   }
 
   updateAttributes(
     parent.childNodes[index],
     newNode.props || {},
-    oldNode.props || {}
+    oldNode.props || {},
   );
 
-  const maxLength = Math.max(
-    newNode.children.length,
-    oldNode.children.length,
-  );
+  const maxLength = Math.max(newNode.children.length, oldNode.children.length);
   for (let i = 0; i < maxLength; i++) {
     updateElement(
       parent.childNodes[index],
       newNode.children[i],
       oldNode.children[i],
-      i
-    )
+      i,
+    );
   }
 }
 
@@ -80,7 +73,7 @@ function updateAttributes(target, newProps, oldProps) {
 
   for (const attr of Object.keys(oldProps)) {
     if (newProps[attr] !== undefined) continue;
-    target.removeAttribute(attr)
+    target.removeAttribute(attr);
   }
 }
 
@@ -98,13 +91,13 @@ const newState = [
 const render = (state) => (
   <div id="app">
     <ul>
-      { state.map(({ completed, content }) => (
+      {state.map(({ completed, content }) => (
         <li class={completed ? 'completed' : null}>
           <input type="checkbox" class="toggle" checked={completed} />
-          { content }
+          {content}
           <button class="remove">삭제</button>
         </li>
-      )) }
+      ))}
     </ul>
     <form>
       <input type="text" />
@@ -120,7 +113,4 @@ const $root = document.createElement('div');
 
 document.body.appendChild($root);
 updateElement($root, oldNode);
-setTimeout(() =>
-    updateElement($root, newNode, oldNode),
-  1500
-); // 1초 뒤에 DOM 변경
+setTimeout(() => updateElement($root, newNode, oldNode), 1500); // 1초 뒤에 DOM 변경
